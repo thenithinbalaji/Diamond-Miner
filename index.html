@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8" />
+    <title>Diamond Miner</title>
+
+    <meta
+     name="description"
+     content="Mine the Earth and get diamonds!"/>
+
+    <meta name="theme-color" content="#ffffff" />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-width: 800px;
+        min-height: 100%;
+        font-family: "Helevitica", "Chalkboard SE", "Comic Neue", sans-serif;
+      }
+
+      .wrapper {
+        padding-top: 30vh;
+        width: 220px;
+        margin: auto;
+      }
+
+      .info {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+      }
+
+      pre {
+        margin: 0;
+      }
+
+      h1 {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .textwow {
+        cursor: pointer;
+        position: absolute;
+        font-size: 33px;
+        font-weight: bold;
+        -webkit-text-stroke: 1px white;
+      }
+
+      .print {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+      }
+
+      .sitter {
+        position: fixed;
+        bottom: 15px;
+        font-family: monospace;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .watch {
+        background: rgba(0, 0, 0, 0.07);
+        padding: 10px 15px;
+        border-radius: 22px;
+        display: inline-block;
+        margin-right: 5px;
+      }
+
+      .left {
+        left: 15px;
+      }
+
+      .right {
+        right: 15px;
+      }
+
+      
+      .info span {
+        font-weight: bold;
+      }
+
+      .largewow {
+        position: absolute;
+        font-size: 240px;
+        transform: translateX(-50%);
+        z-index: -2;
+        -webkit-text-stroke: 4px white;
+      }
+
+      .rainbow {
+        color: hotpink;
+        animation: rainbow 1500ms ease infinite;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .secretwow {
+        display: inline-block;
+        cursor: pointer;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQYV2NkYGD4z8DAwMgABXAGNgGwSgwVAFbmAgXQdISfAAAAAElFTkSuQmCC);
+      }
+
+      .secretwow.found {
+        font-weight: bold;
+      }
+
+      .print {
+        cursor: pointer;
+      }
+
+      .hatted {
+        display: none;
+      }
+
+      .spinLeft {
+        animation: spinLeft 700ms forwards infinite;
+      }
+
+      .spinRight {
+        animation: spinRight 700ms forwards infinite;
+      }
+
+
+      .watch pre {
+        display: inline;
+        text-transform: none;
+      }
+
+      .how {
+        width: 33px;
+        height: 33px;
+        display: inline-flex;
+        background-repeat: no-repeat;
+        background-color: rgba(0, 0, 0, 0.07);
+        border-radius: 50%;
+        background-size: 20px 20px;
+        background-position: center;
+        vertical-align: top;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        text-decoration: none;
+      }
+
+      @media (max-width: 700px) {
+        .sitter {
+          display: none;
+        }
+      }
+
+      @keyframes rainbow {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+
+      @keyframes spinLeft {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spinRight {
+        0% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+
+      @media print {
+        .print,
+        .sitter {
+          display: none;
+        }
+
+        .info {
+          position: absolute;
+        }
+      }
+
+	div {
+  	color: black;
+	}
+
+    </style>
+  </head>
+
+
+  <body style="background-color: lightblue;">
+    <div class="info">
+      <h1 style="color:black;">DIAMOND MINER </h1>
+    
+      <div class="stat">
+
+      <div id="longcontainer">
+      🏆 ACHIEVEMENT You found <span id="length">a common</span> diamond!
+      </div>
+
+      <div id="wowers">You have collected <span id="wows">0</span> diamonds</div>
+
+      <div id="largewowcontainer" class="hidden">
+      You have collected <span id="largeWows">0</span> large diamonds
+      </div>
+
+      <div id="rainbowwowcontainer" class="hidden">
+      You have rainbowed <span id="rainbow">0</span> diamonds
+      </div>
+
+      <div id="dogeprimecontainer" class="hidden">
+      DiamondPrime is <span id="dogeprime">inactive</span>
+      </div>
+
+      <div id="secretwowcontainer" class="hidden">
+      You have found <span id="secretwow">0</span>/<span id="secretwowtotal">100</span>
+      Secret Diamonds
+      </div>
+
+      <div id="fibowowcontainer" class="hidden">
+      FibonacciDiamond is <span id="fibo">inactive</span>
+      </div>
+      
+    </div>
+    </div>
+    <div class="print"><h1 style="color:white;"></h1></div>
+    <div class="wrapper">
+
+<pre class="hatted">
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                               
+</pre>
+<pre class="head">
+<b>ENTER THE LONG LONG MINE</b><br>
+<b>TO THE CENTER OF EARTH!!</b><br>
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+</pre>
+<pre class="neck">
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+                             
+</pre>
+</div>
+     <div class="sitter right">
+      <div class="watch">
+        <b>Useless website by THE NITHIN BALAJI</b>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
