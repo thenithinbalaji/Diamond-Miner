@@ -22,6 +22,9 @@ let secretwows = 0
 let minidoges = 0
 const primeWows = []
 
+let fibonacciChallengeStarted = false
+let fibonacciChallengeComplete = false
+const fibonacciWows = []
 const fibonacciSecretWows = []
 let dogePrime = false
 
@@ -55,147 +58,21 @@ window.onscroll = function(ev) {
 
 function injectNeck(entry) {
   // Stops observing the old neck element
-  function injectNeck(entry) {
-    observer.unobserve(entry.target)
-    createNewNeck()
-    observeNewNeck()
-    injectWow()
-  }
-  
-  function createNewNeck() {
-    const clonedNeck = neck.cloneNode(true)
-    wrapper.appendChild(clonedNeck)
-  }
-  
-  function observeNewNeck() {
-    observer.observe(clonedNeck)
-  }
+  observer.unobserve(entry.target)
+
+  const clonedNeck = neck.cloneNode(true)
+  wrapper.appendChild(clonedNeck)
+  observer.observe(clonedNeck)
+
+  injectWow()
 }
 
 function injectWow() {
-  function injectWow() {
-    createNewWow()
-    updateWowsCount()
-    updateLengthText()
-    checkForLargeWow()
-  }
-  
-  function createNewWow() {
-    const newWow = document.createElement("div")
-    newWow.className = "textwow"
-    newWow.innerText = "💎"
-    newWow.style.left = 100 + Math.random() * (window.innerWidth - 300) + "px"
-    newWow.style.top = wrapper.offsetHeight - 200 + "px"
-    document.body.appendChild(newWow)
-  }
-  
-  function updateWowsCount() {
-    wows++
-    wowEl.innerText = wows
-    if (isPrime(wows)) {
-      primeWows.push(newWow)
-    }
-    if (isFibonacci(wows)) {
-      fibonacciWows.push(newWow)
-    }
-  }
-  
-  function updateLengthText() {
-    if (wows === 10) {
-      lengthEl.innerText = "an uncommon"
-    }
-    if (wows === 50) {
-      lengthEl.innerText = "a rare"
-    }
-    if (wows === 100) {
-      lengthEl.innerText = "the rarest"
-    }
-    if (wows === 150) {
-      lengthEl.innerText = "an unique"
-    }
-    if (wows === 250) {
-      lengthEl.innerText = "an unknown"
-    }
-    if (wows === 500) {
-      lengthEl.innerText = "an ultra pure"
-    }
-    if (wows === 1000) {
-      lengthEl.innerText = "the purest"
-    }
-    if (wows === 2000) {
-      lengthEl.innerText = "an ancient"
-    }
-    if (wows === 3000) {
-      lengthEl.innerText = "a dino poop"
-    }
-    if (wows === 5000) {
-      lengthEl.innerText = "an astro"
-    }
-    if (wows === 10000) {
-      lengthEl.innerText = "the world's oldest"
-    }
-    if (wows === 30000) {
-      lengthEl.innerText = "the hardcore"
-    }
-    if (wows === 50000) {
-      lengthEl.innerText = "a star"
-    }
-    if (wows === 80000) {
-      lengthEl.innerText = "the big bang"
-    }
-  }
-  
-  function checkForLargeWow() {
-    if (wows > 200 && Math.random() > 0.993) {
-      injectLargeWow()
-    }
-  }
-
-  if (wows === 30000) {
-    lengthEl.innerText = "the hardcore"
-  }
-
-  if (wows === 50000) {
-    lengthEl.innerText = "a star"
-  }
-
-  if (wows === 80000) {
-    lengthEl.innerText = "the big bang"
-  }
-
-  if (wows > 200 && Math.random() > 0.993) {
-    injectLargeWow()
-  }
-}
-
-function injectLargeWow() {
-  largewows++
-  largewowEl.innerText = largewows
-
-  largeWowContainer.classList.remove("hidden")
+  wows++
+  wowEl.innerText = wows
 
   const newWow = document.createElement("div")
-  newWow.className = "largewow"
-  newWow.innerText = "💎"
-  newWow.style.left = "50%"
-  newWow.style.top = wrapper.offsetHeight - 200 + "px"
-  document.body.appendChild(newWow)
-}
-
-function isPrime(n) {
-  if (n < 2) return false
-  var q = Math.floor(Math.sqrt(n))
-
-  for (var i = 2; i <= q; i++) {
-    if (n % i == 0) {
-      return false
-    }
-  }
-
-  return true
-}
-
-function isSquare(n) {
+  newWow.className = "textwow"
   return n > 0 && Math.sqrt(n) % 1 === 0
 }
 
@@ -303,6 +180,7 @@ function setupSecretWows() {
   let allnecksAsArray = Array.apply(null, allnecks)
   allnecksAsArray.shift() // remove first item
 
+  shuffleArray(allnecksAsArray)
   shuffleArray(allnecksAsArray)
 
   // Do this for first 100 shuffled neck pieces
