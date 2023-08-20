@@ -19,7 +19,7 @@ let wows = 0
 let largewows = 0
 let rainbowwows = 0
 let secretwows = 0
-let minidoges = 0
+
 const primeWows = []
 
 let fibonacciChallengeStarted = false
@@ -57,9 +57,6 @@ window.onscroll = function(ev) {
 }
 
 function injectNeck(entry) {
-  // Stops observing the old neck element
-  observer.unobserve(entry.target)
-
   const clonedNeck = neck.cloneNode(true)
   wrapper.appendChild(clonedNeck)
   observer.observe(clonedNeck)
@@ -163,9 +160,11 @@ function injectLargeWow() {
 
 function isPrime(n) {
   if (n < 2) return false
+  if (n === 2) return true
+  if (n % 2 === 0) return false
   var q = Math.floor(Math.sqrt(n))
 
-  for (var i = 2; i <= q; i++) {
+  for (var i = 3; i <= q; i+=2) {
     if (n % i == 0) {
       return false
     }
@@ -179,10 +178,17 @@ function isSquare(n) {
 }
 
 function isFibonacci(numberToCheck) {
-  return (
-    isSquare(5 * numberToCheck * numberToCheck + 4) ||
-    isSquare(5 * numberToCheck * numberToCheck - 4)
-  )
+  let a = 0
+  let b = 1
+  while (a <= numberToCheck) {
+    if (a === numberToCheck) {
+      return true
+    }
+    let temp = a
+    a = b
+    b = temp + b
+  }
+  return false
 }
 
 function shuffleArray(array) {
