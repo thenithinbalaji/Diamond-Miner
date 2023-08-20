@@ -67,17 +67,22 @@ function injectNeck(entry) {
   injectWow()
 }
 
-function injectWow() {
+function incrementWows() {
   wows++
   wowEl.innerText = wows
+}
 
+function createNewWow() {
   const newWow = document.createElement("div")
   newWow.className = "textwow"
   newWow.innerText = "💎"
   newWow.style.left = 100 + Math.random() * (window.innerWidth - 300) + "px"
   newWow.style.top = wrapper.offsetHeight - 200 + "px"
   document.body.appendChild(newWow)
+  return newWow
+}
 
+function checkPrimeAndFibonacci(newWow) {
   if (isPrime(wows)) {
     primeWows.push(newWow)
   }
@@ -85,7 +90,9 @@ function injectWow() {
   if (isFibonacci(wows)) {
     fibonacciWows.push(newWow)
   }
+}
 
+function updateLengthText() {
   if (wows === 10) {
     lengthEl.innerText = "an uncommon"
   }
@@ -141,10 +148,20 @@ function injectWow() {
   if (wows === 80000) {
     lengthEl.innerText = "the big bang"
   }
+}
 
+function injectLargeWowCondition() {
   if (wows > 200 && Math.random() > 0.993) {
     injectLargeWow()
   }
+}
+
+function injectWow() {
+  incrementWows()
+  const newWow = createNewWow()
+  checkPrimeAndFibonacci(newWow)
+  updateLengthText()
+  injectLargeWowCondition()
 }
 
 function injectLargeWow() {
@@ -163,9 +180,11 @@ function injectLargeWow() {
 
 function isPrime(n) {
   if (n < 2) return false
+  if (n === 2) return true
+  if (n % 2 === 0) return false
   var q = Math.floor(Math.sqrt(n))
 
-  for (var i = 2; i <= q; i++) {
+  for (var i = 3; i <= q; i += 2) {
     if (n % i == 0) {
       return false
     }
@@ -178,11 +197,14 @@ function isSquare(n) {
   return n > 0 && Math.sqrt(n) % 1 === 0
 }
 
+let fiboNumbers = [0, 1]
+
 function isFibonacci(numberToCheck) {
-  return (
-    isSquare(5 * numberToCheck * numberToCheck + 4) ||
-    isSquare(5 * numberToCheck * numberToCheck - 4)
-  )
+  while (fiboNumbers[fiboNumbers.length - 1] < numberToCheck) {
+    fiboNumbers.push(fiboNumbers[fiboNumbers.length - 1] + fiboNumbers[fiboNumbers.length - 2])
+  }
+
+  return fiboNumbers.includes(numberToCheck)
 }
 
 function shuffleArray(array) {
