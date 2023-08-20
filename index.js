@@ -67,16 +67,49 @@ function injectNeck(entry) {
   injectWow()
 }
 
+function createWowElement(className, innerText, left, top) {
+  const newWow = document.createElement("div")
+  newWow.className = className
+  newWow.innerText = innerText
+  newWow.style.left = left
+  newWow.style.top = top
+  document.body.appendChild(newWow)
+  return newWow
+}
+
+function updateLengthText(wows) {
+  const lengthTexts = {
+    10: "an uncommon",
+    50: "a rare",
+    100: "the rarest",
+    150: "an unique",
+    250: "an unknown",
+    500: "an ultra pure",
+    1000: "the purest",
+    2000: "an ancient",
+    3000: "a dino poop",
+    5000: "an astro",
+    10000: "the world's oldest",
+    30000: "the hardcore",
+    50000: "a star",
+    80000: "the big bang",
+  }
+
+  if (wows in lengthTexts) {
+    lengthEl.innerText = lengthTexts[wows]
+  }
+}
+
 function injectWow() {
   wows++
   wowEl.innerText = wows
 
-  const newWow = document.createElement("div")
-  newWow.className = "textwow"
-  newWow.innerText = "💎"
-  newWow.style.left = 100 + Math.random() * (window.innerWidth - 300) + "px"
-  newWow.style.top = wrapper.offsetHeight - 200 + "px"
-  document.body.appendChild(newWow)
+  const newWow = createWowElement(
+    "textwow",
+    "💎",
+    100 + Math.random() * (window.innerWidth - 300) + "px",
+    wrapper.offsetHeight - 200 + "px"
+  )
 
   if (isPrime(wows)) {
     primeWows.push(newWow)
@@ -86,61 +119,7 @@ function injectWow() {
     fibonacciWows.push(newWow)
   }
 
-  if (wows === 10) {
-    lengthEl.innerText = "an uncommon"
-  }
-
-  if (wows === 50) {
-    lengthEl.innerText = "a rare"
-  }
-
-  if (wows === 100) {
-    lengthEl.innerText = "the rarest"
-  }
-
-  if (wows === 150) {
-    lengthEl.innerText = "an unique"
-  }
-
-  if (wows === 250) {
-    lengthEl.innerText = "an unknown"
-  }
-
-  if (wows === 500) {
-    lengthEl.innerText = "an ultra pure"
-  }
-
-  if (wows === 1000) {
-    lengthEl.innerText = "the purest"
-  }
-
-  if (wows === 2000) {
-    lengthEl.innerText = "an ancient"
-  }
-
-  if (wows === 3000) {
-    lengthEl.innerText = "a dino poop"
-  }
-
-  if (wows === 5000) {
-    lengthEl.innerText = "an astro"
-  }
-
-  if (wows === 10000) {
-    lengthEl.innerText = "the world's oldest"
-  }
-
-  if (wows === 30000) {
-    lengthEl.innerText = "the hardcore"
-  }
-
-  if (wows === 50000) {
-    lengthEl.innerText = "a star"
-  }
-
-  if (wows === 80000) {
-    lengthEl.innerText = "the big bang"
-  }
+  updateLengthText(wows)
 
   if (wows > 200 && Math.random() > 0.993) {
     injectLargeWow()
@@ -153,19 +132,19 @@ function injectLargeWow() {
 
   largeWowContainer.classList.remove("hidden")
 
-  const newWow = document.createElement("div")
-  newWow.className = "largewow"
-  newWow.innerText = "💎"
-  newWow.style.left = "50%"
-  newWow.style.top = wrapper.offsetHeight - 200 + "px"
-  document.body.appendChild(newWow)
+  const newWow = createWowElement(
+    "largewow",
+    "💎",
+    "50%",
+    wrapper.offsetHeight - 200 + "px"
+  )
 }
 
 function isPrime(n) {
   if (n < 2) return false
   var q = Math.floor(Math.sqrt(n))
 
-  for (var i = 2; i <= q; i++) {
+  for (var i = 2; i * i <= n; i++) {
     if (n % i == 0) {
       return false
     }
