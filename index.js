@@ -38,7 +38,7 @@ document.querySelector(".print").addEventListener("click", () => {
 
 const observer = new IntersectionObserver(
   (entries, observer) => {
-    entries.forEach((entry) => {
+    entries.map((entry) => {
       if (entry.intersectionRatio > 0) {
         injectNeck(entry)
       }
@@ -193,6 +193,12 @@ function shuffleArray(array) {
 }
 
 function onBodyClick(e) {
+  handleTextWowClick(e)
+  handleSecretWowClick(e)
+  handleFibonacciChallenge(e)
+}
+
+function handleTextWowClick(e) {
   if (e.target.className === "textwow" && largewows >= 15) {
     rainbowwows++
     e.target.classList.add("rainbow")
@@ -212,18 +218,17 @@ function onBodyClick(e) {
       setupSecretWows()
     }
   }
+}
 
+function handleSecretWowClick(e) {
   if (e.target.className === "secretwow") {
     e.target.classList.add("found")
     secretwows++
     secretWowEl.innerText = secretwows
-
-    if (secretwows === 100) {
-      fibonacciChallengeStarted = true
-      fibowowcontainer.classList.remove("hidden")
-    }
   }
+}
 
+function handleFibonacciChallenge(e) {
   if (fibonacciChallengeStarted) {
     if (
       e.target.classList.contains("textwow") ||
